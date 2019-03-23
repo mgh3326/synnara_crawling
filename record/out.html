@@ -1,0 +1,1546 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>신나라레코드</title>
+    <link rel="stylesheet" type="text/css" href="/resources/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/sub.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/country.css" />
+
+    <link rel="stylesheet" type="text/css" href="/resources/js/jquery/css/theme/jquery-ui-1.8.19.synnara.css" />
+
+    <script type="text/javascript" src="/resources/js/jquery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery/jquery-ui-1.8.19.custom.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery/jquery.cookie.js"></script>
+    <!--  script type="text/javascript" src="/resources/js/jqueryCommon.js"></script -->
+    <script type="text/javascript" src="/resources/js/common.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery/jquery.banner.js"></script>
+    <!-- Add This sns스크립트  -->
+	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5125bab078019483"></script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- skipnavigation -->
+      <p class="skipnavigation"><a href="#container">메뉴 건너뛰고 본문 바로가기</a></p>
+      <!-- //skipnavigation -->
+
+      <!-- top -->
+
+
+<script type="text/javascript">
+
+
+
+
+	var _ctx = "";
+	var ctx = "";
+	var formYN="Y";
+	var selectName ="통합검색";
+
+	//var selectName = "통합검색";
+
+	function goProductMain(category_id){
+
+		location.href = "/ss/ssPartMain.do" + "?" + $.param({categoryId : category_id});
+
+	}
+
+	function goProductList(category_id){
+		var viewType = $("#VIEW_TYPE").val() == "" || $("#VIEW_TYPE").val() == undefined ? "L" : $("#VIEW_TYPE").val();
+		location.href = "/sp/sp110Main.do" + "?" + $.param({viewType : viewType, categoryId : category_id});
+	}
+
+	function goProductList_search(category_id, box_yn, sign_yn, menuType, order){
+
+		location.href = "/sp/SP900.do" + "?" + $.param({categoryId : category_id})
+				+ "&" + $.param({box_yn : box_yn})
+				+ "&" + $.param({sign_yn : sign_yn})
+				+ "&" + $.param({menuType : menuType})
+		        + "&" + $.param({order : order});
+
+
+	}
+	//dvd_bluray 구분 검색
+	function goProductList_search_type(category_id, box_yn, sign_yn, menuType, prod_type, order){
+		location.href = "/sp/SP900.do" + "?" + $.param({categoryId : category_id})
+				+ "&" + $.param({box_yn : box_yn})
+				+ "&" + $.param({sign_yn : sign_yn})
+				+ "&" + $.param({menuType : menuType})
+				+ "&" + $.param({prodtype : prod_type})
+		        + "&" + $.param({order : order});
+
+
+	}
+
+	function goProductList_lp(category_id){
+		var viewType = $("#VIEW_TYPE").val() == "" || $("#VIEW_TYPE").val() == undefined ? "L" : $("#VIEW_TYPE").val();
+		location.href = "/sp/sp110Main.do" + "?" + $.param({PROD_TYPE: '013', viewType : viewType, categoryId : category_id});
+	}
+
+	function goProductList_box(category_id){
+		var viewType = $("#VIEW_TYPE").val() == "" || $("#VIEW_TYPE").val() == undefined ? "L" : $("#VIEW_TYPE").val();
+		location.href = "/sp/sp110Main.do" + "?" + $.param({BOX_YN: 'Y', viewType : viewType, categoryId : category_id});
+	}
+
+	function goProductList_audio(category_id){
+		var viewType = $("#VIEW_TYPE").val() == "" || $("#VIEW_TYPE").val() == undefined ? "L" : $("#VIEW_TYPE").val();
+		location.href = "/sp/sp110Main.do" + "?" + $.param({PROD_TYPE: '019', viewType : viewType, categoryId : category_id});
+	}
+
+	function goProductList_Sign(category_id){
+		var viewType = $("#VIEW_TYPE").val() == "" || $("#VIEW_TYPE").val() == undefined ? "L" : $("#VIEW_TYPE").val();
+		location.href = "/sp/sp110Main.do" + "?" + $.param({SIGN_YN: 'Y', viewType : viewType, categoryId : category_id});
+	}
+
+	function goProductList_main(category_id, gubun){
+		var viewType = $("#VIEW_TYPE").val() == "" || $("#VIEW_TYPE").val() == undefined ? "L" : $("#VIEW_TYPE").val();
+		location.href = "/sp/sp110Main.do" + "?" + $.param({SHORTCUT_TYPE: gubun, viewType : viewType, categoryId : category_id});
+	}
+
+	// 예약알림 페이지 이동
+	function goSc510MainList(){
+		location.href = "/sc/sc510Main.do";
+	}
+
+	// 전문가컬럼 이동
+	function goSb210MainList(){
+		location.href = "/sb/communityPage.do?PAGE_ID=sb210Main";
+	}
+
+
+
+	function setMymenu(login){
+
+		var SHOP_AUTH = "N";
+		var html = "";
+
+		if(login) SHOP_AUTH = "Y";
+		html += "<ul class='clearfix'>";
+		if(SHOP_AUTH == 'Y'){
+			html += "<li><a href='/sl/sl110Main/logout.do'><img src='/resources/images/layout/my_logout.gif' alt='로그아웃' /></a></li>";
+			html += "<li><a href='/sm/sm110Main.do'><img src='/resources/images/layout/my_page.gif' alt='마이페이지' /></a></li>";
+			html += "<li><a href='/so/so130MyPageOrderMain.do'><img src='/resources/images/layout/my_delivery.gif' alt='주문배송조회' /></a></li>";
+		}else if(SHOP_AUTH == 'M'){
+			html += "<li><a href='/sl/sl110Main/logout.do'><img src='/resources/images/layout/my_logout.gif' alt='로그아웃' /></a></li>";
+			html += "<li><a href='/so/so130MyPageOrderMain.do'><img src='/resources/images/layout/my_delivery.gif' alt='주문배송조회' /></a></li>";
+		}else{
+			html += "<li><a href='https://www.synnara.co.kr/sl/sl110Main/login.do'><img src='/resources/images/layout/my_login.gif' alt='로그인' /></a></li>";
+			html += "<li><a href='https://www.synnara.co.kr/su/su210Main.do'><img src='/resources/images/layout/my_join.gif' alt='회원가입' /></a></li>";
+			html += "<li><a href='/so/so130MyPageOrderMain.do'><img src='/resources/images/layout/my_delivery.gif' alt='주문배송조회' /></a></li>";
+		}
+		html += "<li><a href='/sm/sm310Main.do'><img src='/resources/images/layout/my_cart.gif' alt='장바구니' /></a></li>";
+		html += "<li><a href='/sh/sh300Main.do'><img src='/resources/images/layout/my_customer.gif' alt='고객센터' /></a></li>";
+		html += "<li><a href='/sc/sc310Main.do'><img src='/resources/images/layout/my_notice.gif' alt='공지사항' /></a></li>";
+		html += "</ul>";
+
+    	$("#MYMENU").html(html);
+	}
+
+
+	// 카테고리 :클래식 메뉴 이동
+	function goClassicMain(type){
+		// type : 음반사 <L> , 작곡가<M>, 연주자<P>, 지휘자<C>, SACD<S>, Synnara Exclusive<E>
+		if(type == "L" || type == "M" || type == "C" ){ // 음반사, 작곡가, 지휘자
+			location.href = "/ss/ss440Main.do" + "?" + $.param({INS_TYPE : type});
+		} else if(type == "P"){ // 연주자
+			location.href = "/ss/ss450Main.do" + "?" + $.param({INS_TYPE : type});
+		} else if(type == "S"){ // SACD
+			location.href = "/sp/sp110Main.do" + "?" + $.param({categoryId : "CT20000003",viewType:"L",PROD_TYPE:"019" });
+		} else if(type == "E"){ // Synnara Exclusive
+			location.href = "/ss/ss460Main.do" + "?" + $.param({INS_TYPE : type});
+		}
+	}
+
+	// Series & Collection 메뉴 이동
+	function goSeriesList(type){
+		location.href = "/ss/ss430Main.do" + "?" + $.param({CATEGORE_TYPE : type});
+	}
+
+	// Synnara Exclusive 메뉴 이동
+	//function goSynnaraEx(id){
+	//	location.href = "/ss/ss460Main.do" + "?" + $.param({CATEGORY_ID : id});
+	//}
+
+	// Label Corner 링크
+	function setLabelCorner(label_gb){
+		location.href = "/ss/ss620Main.do" + "?" + $.param({LABEL_GB : label_gb});
+	}
+
+
+	$(document).ready(function(){
+
+		$("#searchselectbox").mouseleave(function(){
+// 			iview("select","all","통합검색");
+			var l = 0;
+			//alert(int);
+			for(l=0;l<11;l++){
+				var value = "select" + l;
+				if(document.getElementById(value)){
+					document.getElementById(value).style.display="none";
+				};
+			};
+
+		});
+
+
+		total =$('#SearchTotal').val();
+		if(total > 0 ){
+			//$('#chekText').text('결과내 재검색');
+			//$('#srchre').attr("disabled","false");
+
+			html = "<input type='checkbox'  id='srchre' name='srchre' value='R'  >결과내재검색";
+			$('#searchinsearch').append(html);
+
+		}else{
+			html = "<input type='hidden'  id='srchre' name='srchre' value=''  >";
+			$('#searchinsearch').append(html);
+		}
+
+        if (document.searchForm1) {
+            var fm = document.searchForm;
+            var sm = document.searchForm1;
+            fm.ItemWhere.value = sm.ItemWhere.value;
+            fm.Item1Where.value = sm.Item1Where.value;
+            fm.Item2Where.value = sm.Item2Where.value;
+            fm.Item3Where.value = sm.Item3Where.value;
+            fm.Item4Where.value = sm.Item4Where.value;
+            fm.Item5Where.value = sm.Item5Where.value;
+            fm.Plus1Where.value = sm.Plus1Where.value;
+            fm.Plus2Where.value = sm.Plus2Where.value;
+            fm.Plus3Where.value = sm.Plus3Where.value;
+            fm.Plus4Where.value = sm.Plus4Where.value;
+            fm.Plus5Where.value = sm.Plus5Where.value;
+            fm.Plus6Where.value = sm.Plus6Where.value;
+
+
+            if(typeof(sm.allCate) 		!= 'undefined') { fm.allCate.value 		= sm.allCate.value;  }
+	        if(typeof(sm.homeCate) 		!= 'undefined') { fm.homeCate.value 	= sm.homeCate.value;  }
+	        if(typeof(sm.foreignCate) 	!= 'undefined') { fm.foreignCate.value 	= sm.foreignCate.value;  }
+	        if(typeof(sm.classicCate) 	!= 'undefined') { fm.classicCate.value 	= sm.classicCate.value;  }
+	        if(typeof(sm.dvdCate) 		!= 'undefined') { fm.dvdCate.value 		= sm.dvdCate.value;  }
+	        if(typeof(sm.shopCate) 		!= 'undefined') { fm.shopCate.value 	= sm.shopCate.value; }
+	        if(typeof(sm.plusCate) 		!= 'undefined') { fm.plusCate.value 	= sm.plusCate.value;  }
+
+
+	        /* 2015.07.13 검색리스트 표시하는 부분에서 아래 오류생김
+            fm.allCate.value = sm.allCate.value;
+            fm.homeCate.value = sm.homeCate.value;
+            fm.foreignCate.value = sm.foreignCate.value;
+            fm.classicCate.value = sm.classicCate.value;
+            fm.dvdCate.value = sm.dvdCate.value;
+            fm.shopCate.value = sm.shopCate.value;
+            fm.plusCate.value = sm.plusCate.value;
+            */
+
+        }
+
+ 		$("#gnb > li").hover(function(){
+
+ 			var idx = $(this).index();
+ 			$("#a_gnb" + idx).addClass("selected");
+			var obj = $(this).find("img");
+			var img_src = $(obj).attr("src");
+			if(img_src.indexOf("_on") == -1){
+				img_src = img_src.substring(0, img_src.indexOf(".png")) + "_on" + img_src.substring(img_src.indexOf(".png"));
+				$(obj).attr("src", img_src);
+				$(this).find(".depth2_wrap").show();
+			}
+		},
+		function(){
+			var idx = $(this).index();
+			$("#a_gnb" + idx).removeClass("selected");
+			var obj = $(this).find("img");
+			var img_src = $(obj).attr("src");
+			if(img_src.indexOf("_on") != -1){
+				img_src = img_src.substring(0, img_src.indexOf(".png") - 3) + img_src.substring(img_src.indexOf(".png"));
+				$(obj).attr("src", img_src);
+				$(this).find(".depth2_wrap").hide();
+			}
+		});
+
+ 		setMymenu();
+
+ 		$("#txt01").keypress(function(e){
+				submitSearch(e);
+		});
+
+ 		$(".psw_list_tmp a").click(function(){
+ 			$("#txt01").val($(this).html());
+
+ 			e = jQuery.Event("keypress", { keyCode: 13 });
+ 			$("#txt01").trigger(e);
+ 		});
+
+	});
+
+	function goCommunityPage(page_id){
+	 location.href = "/sb/communityPage.do" + "?" + $.param({PAGE_ID : page_id});
+	}
+
+	function goCommunityPage(page_id){
+		location.href = "/sb/communityPage.do" + "?" + $.param({PAGE_ID : page_id});
+	}
+	function goMusicStory(page_id){
+		location.href = "/"+"sb/"+page_id + ".do?" + $.param({PAGE_ID : page_id});
+	}
+</script>
+
+<script type="text/javascript" src="/resources/js/search.js"></script>
+<script type="text/javascript" src="/resources/js/dqAutoCompleteCommon.js"></script>
+
+
+<form id="searchForm" name="searchForm"  method="post" style="padding:0px; margin: 0px">
+
+<input type="hidden" id="Resultview" name="Resultview" value="" />
+<input type="hidden" id="menuType" name="menuType" value="01" />
+<input type="hidden" id="categoryId" name="categoryId" value="" />
+<input type="hidden" id="importYN" name="importYN" value="" />
+<input type="hidden" id="soldOutYN" name="soldOutYN"  value="" />
+<input type="hidden" id="topmenu" name="topmenu" value="" />
+<input type="hidden" id="series_no" name="series_no" value=" "/>
+<input type="hidden" id="disp_id" name="disp_id" value="" />
+<input type="hidden" id="label_id" name="label_id" value="" />
+<input type="hidden" id="mem_id" name="mem_id" value="" />
+<input type="hidden" id="tool_cd" name="tool_cd" value="" />
+<input type="hidden" id="box_yn" name="box_yn" value="" />
+<input type="hidden" id="sign_yn" name="sign_yn" value="" />
+<input type="hidden" id="awards_id" name="awards_id" value="" />
+<input type="hidden" id="sameprod_id" name="sameprod_id" value="" />
+<input type="hidden" id="display_id" name="display_id" value="" />
+<input type="hidden" id="poster_yn" name="poster_yn" value="" />
+<input type="hidden" id="recom" name="recom" value="" />
+<input type="hidden" id="reser_yn" name="reser_yn" value="" />
+<input type="hidden" id="salestartdtm" name="salestartdtm" value="" />
+<input type="hidden" id="sacd_yn" name="sacd_yn" value="" />
+<input type="hidden" id="prodtype" name="prodtype" value="" />
+<input type="hidden" id="newp_yn" name="newp_yn" value="" />
+
+
+
+<input type="hidden" id="plusForm" name="plusForm" value="" />
+<input type="hidden" id="plusView" name="plusView" value="" />
+<input type="hidden" id="formYN" name="formYN" value="" />
+<input type="hidden" id="selectName" name="selectName" value="통합검색" />
+<input type="hidden"  id="hSelectVal" name="hSelectVal" value=""/>
+
+<input type="hidden" id="bigCate" name="bigCate" value="" />
+<input type="hidden" id="hotKeywordYN" name="hotKeywordYN" value="1" />
+<input type="hidden" id="order" name="order" value="" />
+<input type="hidden" id="PlusSelect" name="PlusSelect" value="" />
+<input type="hidden" id="Depthe2Result" name="Depthe2Result" value="" />
+<input type="hidden" id="DethMore" name="DethMore" value="" />
+<input type="hidden" id="GroupMore" name="GroupMore" value="" />
+<input type="hidden" id="temp" name="temp" value=""  />
+<input type="hidden" id="fild1" name="fild1" value=""  />
+<input type="hidden" id="fild" name="fild" value=""  />
+<input type="hidden" id="startPrice" name="startPrice" value=""  />
+<input type="hidden" id="endPrice" name="endPrice" value="" />
+<input type="hidden" id="PageNumber" name="PageNumber" value="" />
+<input type="hidden" id="type" name="type" value="" />
+<input type="hidden" id="startDate" name="startDate" value=""  />
+<input type="hidden" id="endDate" name="endDate" value="" />
+<input type="hidden" id="pageVal" name="pageVal" value="" />
+<input type="hidden" id="artistNM" name="artistNM" value="" />
+<input type="hidden" id="artistID" name="artistID" value=""  />
+
+<input type="hidden" id="Detailtview" name="Detailtview" value="" />
+<input type="hidden" id="Detailindex" name="Detailindex" value="" />
+<input type="hidden" id="date" name="date" value="" />
+
+<input type="hidden" id="text920_10" name="text920_10" value=""  />
+<input type="hidden" id="text920_11" name="text920_11" value=""  />
+<input type="hidden" id="text920_2" name="text920_2" value="" />
+<input type="hidden" id="text920_9" name="text920_9" value=""  />
+<input type="hidden" id="text920_12" name="text920_12" value=""  />
+<input type="hidden" id="code920_2" name="code920_2" value="" />
+<input type="hidden" id="code920_9" name="code920_9" value=""  />
+
+<input type="hidden" id="text921_1" name="text921_1" value="" />
+<input type="hidden" id="text921_2" name="text921_2" value="" />
+<input type="hidden" id="text921_3" name="text921_3" value="" />
+<input type="hidden" id="text921_5" name="text921_5" value="" />
+<input type="hidden" id="text921_4" name="text921_4" value=""  />
+<input type="hidden" id="text921_8" name="text921_8" value="" />
+<input type="hidden" id="code921_1" name="code921_1" value="" />
+<input type="hidden" id="code921_2" name="code921_2" value="" />
+<input type="hidden" id="code921_3" name="code921_3" value="" />
+<input type="hidden" id="code921_5" name="code921_5" value=""  />
+<input type="hidden" id="code921_4" name="code921_4" value="" />
+<input type="hidden" id="code921_8" name="code921_8" value="" />
+<input type="hidden" name="text921_9" id="text921_9" value="" />
+<input type="hidden" name="code921_9" id="code910_9" value=""/>
+
+<input type="hidden" id="text921_10" name="text921_10" value="" />
+<input type="hidden" id="text921_11" name="text921_11" value=""  />
+<input type="hidden" id="text921_12" name="text921_12" value="" />
+
+<input type="hidden" id="text930_7" name="text930_7" value="" />
+<input type="hidden" id="text930_9" name="text930_9" value="" />
+<input type="hidden" id="text930_6" name="text930_6" value="" />
+<input type="hidden" id="code930_7" name="code930_7" value="" />
+<input type="hidden" id="code930_9" name="code930_9" value="" />
+<input type="hidden" id="code930_6" name="code930_6" value="" />
+<input type="hidden" id="code930_2" name="code930_2" value="" />
+<input type="hidden" id="text930_2" name="text930_2" value="" />
+
+
+<input type="hidden" id="text935_9" name="text935_9" value="" />
+<input type="hidden" id="code935_9" name="code935_9" value="" />
+
+<input type="hidden" id="SHOP_AUTH" name="SHOP_AUTH" value="N" />
+
+<input type="hidden" id="ItemWhere" name="ItemWhere" value="" />
+<input type="hidden" id="Item1Where" name="Item1Where" value="" />
+<input type="hidden" id="Item2Where" name="Item2Where" value="" />
+<input type="hidden" id="Item3Where" name="Item3Where" value="" />
+<input type="hidden" id="Item4Where" name="Item4Where" value="" />
+<input type="hidden" id="Item5Where" name="Item5Where" value="" />
+<input type="hidden" id="Plus1Where" name="Plus1Where" value="" />
+<input type="hidden" id="Plus2Where" name="Plus2Where" value="" />
+<input type="hidden" id="Plus3Where" name="Plus3Where" value="" />
+<input type="hidden" id="Plus4Where" name="Plus4Where" value="" />
+<input type="hidden" id="Plus5Where" name="Plus5Where" value="" />
+<input type="hidden" id="Plus6Where" name="Plus6Where" value="" />
+<input type="hidden" id = "SameProd" name="SameProd" value="" />
+<input type="hidden" id="ContentsNo" name="ContentsNo" value="" />
+
+<input type="hidden" id="allCate" name="allCate" value="" />
+<input type="hidden" id="homeCate" name="homeCate" value="" />
+<input type="hidden" id="foreignCate" name="foreignCate" value="" />
+<input type="hidden" id="classicCate" name="classicCate" value="" />
+<input type="hidden" id="dvdCate" name="dvdCate" value="" />
+<input type="hidden" id="shopCate" name="shopCate" value="" />
+<input type="hidden" id="plusCate" name="plusCate" value="" />
+<div id="top">
+  <!-- mymenu_wrap -->
+  <div class="mymenu_wrap">
+    <div id="MYMENU" class="mymenu clearfix">
+    </div>
+  </div>
+  <!-- //mymenu_wrap --><!-- header -->
+  <div class="header">
+		<h1><a href="/ss/ss110Main.do"><img src="/resources/images/layout/h1_logo.gif" alt="신나라레코드" /></a></h1>
+		<div class="search_wrap">
+			<div class="search">
+				<div class="top_search">
+					<ul id="searchselectbox">
+						 <li><a href="javascript:;" onclick="iview('select','','통합검색')"><span id="testSpan" class="on" >통합검색</span></a></li>
+					     <li id="select1" style="display:none;"><a href="javascript:iview('select','prodnm','음반명');">음반명</a></li><li id="select2" style="display:none;"><a href="javascript:iview('select','artist','아티스트명');" >아티스트명</a></li><li id="select3" style="display:none;"><a href="javascript:iview('select','songlist','수록곡');" >수록곡</a></li><li id="select4" style="display:none;"><a href="javascript:iview('select','dvd','DVD/Blu-ray명');" >DVD/Blu-ray명</a></li><li id="select5" style="display:none;"><a href="javascript:iview('select','actor','배우');" >배우</a></li><li id="select6" style="display:none;"><a href="javascript:iview('select','dirctor','감독');" >감독</a></li><li id="select7" style="display:none;"><a href="javascript:iview('select','shop','+shop');" >+Shop</a></li><li id="select8" style="display:none;"><a href="javascript:iview('select','plus','신나라PLUS','8');" >신나라PLUS</a></li><li id="select9" style="display:none;"><a href="javascript:iview('select','label','레이블','9');" >레이블</a></li><li id="select10" style="display:none;"><a href="javascript:iview('select','catNo','Cat.No/바코드','10');">Cat.No/바코드</a></li>
+					</ul>
+       		<input type="text" id="txt01" name="searchTerm" style="ime-mode: active;" value="" onfocus="return dq_setTextbox('0',event);" onmousedown="dq_setTextbox('1',event);" onkeydown="dq_setTextbox('1',event);" autocomplete="off"/>
+       		<label for="txt01"></label>
+       	</div>
+	        <img src="/resources/images/btn/btn_search.gif" alt="검색" onClick="javascript:searchGo();" />
+	        <img src="/resources/images/btn/btn_search_detail.gif" alt="상세검색" onClick="javascript:searchDetail();" />
+	        <label id="searchinsearch"></label>
+<!-- label><input type="checkbox" style="display:none" id="srchre" name="srchre" value="R"  ><p id="chekText" ></p></label-->
+      </div>
+
+
+<script type="text/javascript" src="/resources/js/dqAutoComplete.js"></script>
+<!-- search_result_wrap -->
+<div id="dqAuto" onmouseover="dq_setMouseon();" onmouseout="dq_setMouseoff();" style="display:none;"></div>
+
+      <dl class="s_keyword clearfix">
+        <dt>추천검색어</dt>
+        <dd class="line">|</dd>
+
+        	<dd class="psw_list_tmp"><a href="javascript:goDirectSearch('첸')">첸</a>
+
+								,
+
+        	</dd>
+
+        	<dd class="psw_list_tmp"><a href="javascript:goDirectSearch('방탄소년단')">방탄소년단</a>
+
+								,
+
+        	</dd>
+
+        	<dd class="psw_list_tmp"><a href="javascript:goDirectSearch('아이즈원')">아이즈원</a>
+
+								,
+
+        	</dd>
+
+        	<dd class="psw_list_tmp"><a href="javascript:goDirectSearch('엑소')">엑소</a>
+
+								,
+
+        	</dd>
+
+        	<dd class="psw_list_tmp"><a href="javascript:goDirectSearch('박지훈')">박지훈</a>
+
+								,
+
+        	</dd>
+
+        	<dd class="psw_list_tmp"><a href="javascript:goDirectSearch('우석X관린')">우석X관린</a>
+
+								,
+
+        	</dd>
+
+        	<dd class="psw_list_tmp"><a href="javascript:goDirectSearch('세븐틴')">세븐틴</a>
+
+								,
+
+        	</dd>
+
+        	<dd class="psw_list_tmp"><a href="javascript:goDirectSearch('마마무')">마마무</a>
+
+								,
+
+        	</dd>
+
+        	<dd class="psw_list_tmp"><a href="javascript:goDirectSearch('스트레이 키즈')">스트레이 키즈</a>
+
+								,
+
+        	</dd>
+
+        	<dd class="psw_list_tmp"><a href="javascript:goDirectSearch('정세운')">정세운</a>
+
+        	</dd>
+
+      </dl>
+    </div>
+  </div>
+  <!-- //header --><!-- gnb_area -->
+  <div class="gnb_area">
+    <div class="gnb_wrap">
+      <ul id="gnb" class="clearfix">
+        <li><a id="a_gnb0" href="#" class="gnb01" onClick="goProductMain('CT20000001');return false;"><img src="/resources/images/layout/gnb01.png" alt="국내음반" /></a>
+          <div class="depth2_wrap g_sub01" style="display:none;">
+            <div class="depth2 clearfix">
+              <ul>
+                <li><a href="#" class="gnb01" onClick="goProductList_search('CT21001101', '', '', '01','sale_start_dtm');return false;">가요</a></li>
+                <li><a href="#" class="gnb01" onClick="goProductList_search('CT21001102', '', '', '01','sale_start_dtm');return false;">국악</a></li>
+                <li><a href="#" class="gnb01" onClick="goProductList_search('CT21001103', '', '', '01','sale_start_dtm');return false;">유아/어린이/태교</a></li>
+                <li><a href="#" class="gnb01" onClick="goProductList_search('CT21001104', '', '', '01','sale_start_dtm');return false;">O.S.T/뮤지컬</a></li>
+                <li><a href="#" class="gnb01" onClick="goProductList_search('CT21001105', '', '', '01','sale_start_dtm');return false;">종교/명상</a></li>
+                <li><a href="#" class="gnb01" onClick="goProductList_search('CT21001106', '', '', '01','sale_start_dtm');return false;">기타</a></li>
+                <li><a href="#" class="gnb01" onClick="goProductList_search('CT21001107', '', '', '01','sale_start_dtm');return false;">모음집</a></li>
+                <li><a href="#" class="gnb01" onClick="goProductList_search('CT21005510', '', '', '01','sale_start_dtm');return false;">E-스타샵</a></li>
+                <li><a href="#" class="gnb01" onClick="goProductList_search('CT21001109', '', '', '01','sale_start_dtm');return false;">DVD/BLU-RAY</a></li>
+              </ul>
+              <ul class="gnb_shortcut">
+								<li><a href="/sp/SP900.do?categoryId=CT20000001&reser_yn=Y&order=sale_start_dtm&menuType=01">예약음반</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000001&newp_yn=Y&menuType=01">최신음반</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000001&order=sale_cnt&menuType=01">인기음반</a></li>
+								<li><a href="/sp/SP900.do?recom=01&menuType=01">추천음반</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000001&poster_yn=Y&menuType=01">+포스터</a></li>
+              </ul>
+            </div>
+            <p class="cb bg_bottom"></p>
+          </div>
+        </li>
+        <li><a id="a_gnb1" href="#" class="gnb02" onClick="goProductMain('CT20000002');return false;"><img src="/resources/images/layout/gnb02.png" alt="해외음반" /></a>
+          <div class="depth2_wrap g_sub02" style="display:none;">
+            <div class="depth2 clearfix">
+              <ul>
+                <li><a href="#" onClick="goProductList_search('CT21002201', '', '', '02','sale_start_dtm');return false;">POP</a></li>
+          	    <li><a href="#" onClick="goProductList_search('CT21002202', '', '', '02','sale_start_dtm');return false;">Rock</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21002203', '', '', '02','sale_start_dtm');return false;">Jazz</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21002204', '', '', '02','sale_start_dtm');return false;">J-POP</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21002205', '', '', '02','sale_start_dtm');return false;">New Age</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21002206', '', '', '02','sale_start_dtm');return false;">World</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21002207', '', '', '02','sale_start_dtm');return false;">Compilation</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21002208', '', '', '02','sale_start_dtm');return false;">O.S.T.</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21002209', '', '', '02','sale_start_dtm');return false;">DVD/Blu-Ray</a></li>
+                <!-- li><a href="#" onClick="goProductList('CT21002208');return false;">DVD/Blu-ray</a></li -->
+              </ul>
+              <ul class="gnb_shortcut">
+                <li><a href="/sp/SP900.do?categoryId=CT20000002&reser_yn=Y&order=sale_start_dtm&menuType=02">예약음반</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000002&newp_yn=Y&menuType=02">최신음반</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000002&order=sale_cnt&menuType=02">인기음반</a></li>
+								<li><a href="/sp/SP900.do?recom=02&menuType=02">추천음반</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000002&poster_yn=Y&menuType=02">+포스터</a></li>
+              </ul>
+            </div>
+            <p class="cb bg_bottom"></p>
+          </div>
+        </li>
+        <li><a id="a_gnb2" href="#" class="gnb03" onClick="goProductMain('CT20000003');return false;"><img src="/resources/images/layout/gnb03.png" alt="클래식" /></a>
+          <div class="depth2_wrap g_sub03" style="display:none;">
+            <div class="depth2 clearfix">
+              <ul>
+                <li><a href="#" onClick="goProductList_search('CT21003301', '', '', '03','');return false;">교향곡</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21003302', '', '', '03','');return false;">관현악곡</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21003303', '', '', '03','');return false;">협주곡</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21003304', '', '', '03','');return false;">실내악곡</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21003305', '', '', '03','');return false;">독주곡</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21003306', '', '', '03','');return false;">오페라</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21003307', '', '', '03','');return false;">성악곡</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21003310', '', '', '03','');return false;">크로스오버</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21003311', '', '', '03','');return false;">유아/태교</a></li>
+              </ul>
+              <ul class="gnb_shortcut">
+                <li><a href="/sp/SP900.do?categoryId=CT20000003&reser_yn=Y&order=sale_start_dtm&menuType=03">예약음반</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000003&newp_yn=Y&menuType=03">최신음반</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000003&order=sale_cnt&menuType=03">인기음반</a></li>
+								<li><a href="/sp/SP900.do?recom=03&menuType=03">추천음반</a></li>
+
+              </ul>
+            </div>
+            <p class="cb bg_bottom"></p>
+          </div>
+        </li>
+        <li><a id="a_gnb3" href="#" class="gnb04" onClick="goProductMain('CT20000004');return false;"><img src="/resources/images/layout/gnb04.png" alt="DVD&middot;BLU-RAY" /></a>
+          <div class="depth2_wrap g_sub04" style="display:none;">
+            <div class="depth2 clearfix">
+              <ul>
+                <li><a href="#" onClick="goProductList_search('CT21000004', '', '', '04','sale_start_dtm');return false;">BLU-RAY</a></li>
+                <li><a href="#" onClick="goProductList_search('CT22000004', '', '', '04','sale_start_dtm');return false;">DVD</a></li>
+              </ul>
+              <ul class="gnb_shortcut">
+                <li><a href="/sp/SP900.do?categoryId=CT20000004&reser_yn=Y&menuType=04">예약상품</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000004&newp_yn=Y&menuType=04">최신상품</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000004&order=sale_cnt&menuType=04">인기상품</a></li>
+								<li><a href="/sp/SP900.do?recom=04&menuType=04">추천상품</a></li>
+								<li><a href="/sp/SP900.do?categoryId=CT20000004&poster_yn=Y&menuType=04">+포스터</a></li>
+              </ul>
+            </div>
+            <p class="cb bg_bottom"></p>
+          </div>
+        </li>
+        <li><a id="a_gnb4" href="#" class="gnb05" onClick="goProductMain('CT20000005');return false;"><img src="/resources/images/layout/gnb05.png" alt="+SHOP" /></a>
+          <div class="depth2_wrap g_sub05" style="display:none;">
+            <div class="depth2 clearfix">
+              <ul >
+                <li><a href="#" onClick="goProductList_search('CT21005502', '', '', '05','sale_start_dtm');return false;">이어폰/헤드폰</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21005503', '', '', '05','sale_start_dtm');return false;">디지털가전</a></li>
+                <li><a href="#" style="padding:5px 0px 5px 25px; letter-spacing:-1px; white-space:nowrap;" onClick="goProductList_search('CT21005504', '', '', '05','sale_start_dtm');return false;">컴퓨터/노트북 주변용품</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21005506', '', '', '05','sale_start_dtm');return false;">차량용품</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21005507', '', '', '05','sale_start_dtm');return false;">Apple Store</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21005508', '', '', '05','sale_start_dtm');return false;">스마트폰 ACC</a></li>
+                <li><a href="#" onClick="goProductList_search('CT21005509', '', '', '05','sale_start_dtm');return false;">기타 액세서리</a></li>
+              </ul>
+              <ul>
+                <li><a href="#" onClick="goProductList_search('CT21005510', '', '', '05','sale_start_dtm');return false;">E-스타샵</a></li>
+              </ul>
+            </div>
+            <p class="cb bg_bottom"></p>
+          </div>
+        </li>
+        <li class="sm"><a id="a_gnb5" href="/sr/sr110Main.do" class="gnb06"><img src="/resources/images/layout/gnb06.png" alt="신나라차트" /></a>
+					<div class="depth2_wrap g_sub06" style="display:none;">
+						<div class="depth2 clearfix">
+							<ul class="gnb_shortcut">
+								<li><a href="/sr/sr110Main.do">실시간차트</a></li>
+								<li><a href="/sr/sr120Main.do">일간차트</a></li>
+								<li><a href="/sr/sr130Main.do">주간차트</a></li>
+								<li><a href="/sr/sr140Main.do">월간차트</a></li>
+								<li><a href="/sr/sr150Main.do">연간차트</a></li>
+							</ul>
+						</div>
+						<p class="cb bg_bottom"></p>
+					</div>
+				</li>
+        <li class="a_gnb3"><a id="a_gnb6" href="/sb/sb110Main.do" class="gnb07" ><img src="/resources/images/layout/gnb07.png" alt="신나라PLUS" /></a>
+          <div class="depth2_wrap g_sub07" style="display:none;">
+            <div class="depth2 clearfix">
+              <ul>
+<!-- 				<li><a href="#" onClick="goCommunityPage('sb230Main');return false;">전문가리뷰</a></li> -->
+				<li><a href="#" onClick="goCommunityPage('sb250Main');return false;">회원리뷰</a></li>
+<!-- 				<li><a href="#" onClick="goCommunityPage('sb210Main');return false;">칼럼</a></li> -->
+				<li><a href="#" onClick="goCommunityPage('sb270Main');return false;">오픈케이스</a></li>
+				<li><a href="/sb/sb320Main.do">소장앨범</a></li>
+				<li><a href="#" onClick="goCommunityPage('sb330Main');return false;">테마가있는 이야기</a></li>
+              </ul>
+              <ul>
+				<li><a href="#" onClick="goCommunityPage('sb510Main');return false;">토론광장</a></li>
+				<li><a href="#" onClick="goMusicStory('sb410Main');return false;">음악이야기</a></li>
+				<li><a href="#" onClick="goCommunityPage('sb710Main');return false;">신나라어워드</a></li>
+				<li><a href="#"  onClick="goCommunityPage('sb610Main');return false;">사인회풍경</a></li>
+              </ul>
+            </div>
+            <p class="cb bg_bottom"></p>
+           </div>
+        </li>
+        <li class="none_2d"><a id="a_gnb8" href="/se/se100Main.do" class="gnb08" ><img src="/resources/images/layout/gnb08.png" alt="이벤트" /></a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- //gnb_area -->
+</div>
+<!-- //top -->
+<hr />
+<!-- search_result -->
+<div id="search_result">
+</div>
+</form>
+
+      <!-- //top -->
+
+      <!-- container -->
+      <div id="container" class="clearfix">
+
+
+
+
+
+<div class="cont_top clearfix">
+  <div class="tit_wrap">
+
+
+        <h2><img src="/resources/images/cont_tit/tit_country.gif" title="국내음반"  alt="국내음반" /></h2>
+
+        <!-- h3><img src="/resources/images/cont_tit/tit_sp110.gif" title="가요" /></h3 -->
+
+
+
+
+
+
+
+  </div>
+  <ul class="location clearfix">
+    <li><a href="/">홈</a></li>
+
+
+    	<li>&nbsp;&gt;&nbsp;</li>
+    	<li><a href="#" onClick="goProductMain('CT20000001');return false;">국내음반</a></li>
+
+
+
+
+
+
+    			<li>&nbsp;&gt;&nbsp;</li>
+    			<li><a href="#" onClick="goProductList_search('CT21001101', '', '', '01','sale_start_dtm');return false;">가요</a></li>
+
+
+
+
+
+
+
+
+	    		  <li>&nbsp;&gt;&nbsp;</li>
+	    			<li><a href="#" onClick="goProductList_search('CT22101001', '', '', '01','');return false;">K-POP</a></li>
+
+
+
+  </ul>
+</div>
+
+
+
+
+
+
+
+<!-- 리뷰쓰기 -->
+<form id="moveDetail" name="moveDetail" method="post">
+	<input type="hidden" id="PAGE_ID" name="PAGE_ID" value="sb250Main"/>
+	<input type="hidden" id="PROD_DETAIL_MOVE" name="PROD_DETAIL_MOVE" value="Y"/>
+	<input type="hidden" id="USE_TYPE" name="USE_TYPE" value="INS"/>
+	<input type="hidden" id="COMMUNITY_TYPE" name="COMMUNITY_TYPE" value="C03"/>
+	<input type="hidden" id="PROD_ID" name="PROD_ID" value="P000422727"/>
+</form>
+
+
+
+
+
+
+<div id="prod_coupon_pop"></div>
+
+<!-- contents -->
+<div class="contents">
+  <!-- detail_view_wrap -->
+  <div class="detail_view_wrap">
+    <ul class="product_i_list clearfix">
+
+
+        <li><img src="/resources/images/common/icon_product_i02.gif" alt="이벤트" /></li>
+
+
+
+
+
+
+
+
+    </ul>
+    <ul class="detail_view_tit">
+      <li class="de_tit">
+
+          <span>[세트/특전]</span>
+
+         방탄소년단 - MAP OF THE SOUL : PERSONA (1 + 2 + 3 + 4 = 4종으로 발송) ★예약구매시_단독특전 : 앨범로고 자석북마크 증정★</li>
+      <li class="stit">[포토북(버전별), 포토카드(버전별), 클리어포토피켓(초회한정랜덤), 미니북, 엽서, 포토필름 / 포스터(버전별,통에담아서)증정 / 예약구매시_단독 특전 증정 (품목, 상세 이미지는 추후 공지 예정)]
+          <span> <b> [3월 할인쿠폰_최대 1만원 할인] </b> </span>
+      </li>
+    </ul>
+    <!-- detail_view_top -->
+    <div class="detail_view_top clearfix" style="width:990px;">
+      <!-- img_area -->
+      <div class="img_area fl">
+
+
+		<p class="view_img" >
+	         <img src="https://sfs.synnara.co.kr/App/ImageViewerEShop?IID=P000422727&FMT=2&ATTACH=PO&TYPE=B" alt="" />
+	<!--          포스터 증정 -->
+
+
+
+			          <p style="position:absolute; top:140px; left:-20px; width:80px; height:80px; padding:6px 6px 0 0; background:url('/resources/images/common/poster_01.png') no-repeat left top;"></p>
+
+
+
+
+
+        </p>
+
+        <dl class="product_count clearfix">
+          <dt class="count01">회원추천</dt>
+          <dd class="count01">
+            <p class="fl">
+              <strong class="typ_col02"><span id="PUSH_CNT">0</span></strong> 건
+              <a href="#" onClick="recommendProd('P000422727');return false;"><img src="/resources/images/btn/btn_recomm.gif" alt="추천하기" /></a>
+            </p>
+            <!-- AddThis Button BEGIN -->
+			<div align ="right" class="addthis_toolbox addthis_default_style">
+				<a class="addthis_button_preferred_1"></a>
+				<a class="addthis_button_preferred_2"></a>
+				<a class="addthis_button_preferred_3"></a>
+				<a class="addthis_button_preferred_4"></a>
+				<a class="addthis_button_compact"></a>
+				<a class="addthis_counter addthis_bubble_style"></a>
+			</div>
+			<!-- AddThis Button END -->
+          </dd>
+          <dt class="count02">평점</dt>
+          <dd class="score">
+            <p class="fl">
+              <span class="score_star"><em class="ir" style="width:0.0%;">평점</em></span>
+              <strong><span class="typ_col05">0.0</span> / 5</strong>
+            </p>
+            <span class="fr">
+            	<a href="#prodStory"><img src="/resources/images/btn/btn_comment_w.gif" alt="한줄이야기 작성" /></a>
+            	&nbsp;&nbsp;
+            	<a href="javascript:moveInsert();" ><img src="/resources/images/btn/btn_write_review_2.gif" alt="리뷰 작성" width="65px" height="18px"/></a>
+            </span>
+          </dd>
+
+        </dl>
+      </div>
+      <!-- //img_area -->
+      <!-- info_area -->
+      <div class="info_area fr">
+        <div class="info_product">
+          <table summary="판매가정보">
+          	<caption>판매정보</caption>
+            <colgroup>
+              <col width="90" />
+              <col width="405" />
+            </colgroup>
+            <thead></thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="fir">판매가   </th>
+                <td>
+
+                  <span class="price">70,000원
+</span>
+                  <span class="dis_price">59,600
+</span><span class="dis_price02">원 (15%↓)</span>
+                  <input type="hidden" id="RETAIL_PRICE" name="RETAIL_PRICE" value="70000" />
+                  <input type="hidden" id="SALE_PRICE" name="SALE_PRICE" value="59600" />
+
+				  	<span>&nbsp;&nbsp;&nbsp;</span>
+				  	<span><a href="javascript:coupondownload()"><img src="/resources/images/coupondown/prod_cpdw.gif" border="0"  alt="쿠폰받기"></a></span>
+
+
+<!-- 				  	<span>&nbsp;&nbsp;&nbsp;</span> -->
+
+                </td>
+
+
+              </tr>
+
+              <tr>
+                <th scope="row">맞춤혜택</th>
+                <td>
+                  <ul class="benefit">
+
+                    <li>
+                      (고액구매 즉시할인) <a href="#" id="specialDisPop"><img src="/resources/images/btn/btn_info.gif" alt="할인안내" title="할인안내"  /></a>
+                      <!-- 레이어 인포 --><!-- w200~w400까지 50px단위로 css로 사이즈지정 -->
+                      <div class="lay_up w200" style="top:300px;right:35px;display:none;">
+                        <div class="wrap">
+                          <h4>타이틀-할인안내</h4>
+                            <table summary="고액할인안내">
+                              <caption>고액할인안내</caption>
+                              <thead></thead>
+                              <tbody>
+	                              <tr>
+	                                <th scope="row"><strong>100만원</strong>이상</th>
+	                                <td><strong>7만원</strong>할인</td>
+	                              </tr>
+	                              <tr>
+	                                <th scope="row"><strong>70만원</strong>이상</th>
+	                                <td><strong>5만원</strong>할인</td>
+	                              </tr>
+	                              <tr>
+	                                <th scope="row"><strong>50만원</strong>이상</th>
+	                                <td><strong>3만원</strong>할인</td>
+	                              </tr>
+	                              <tr>
+	                                <th scope="row"><strong>30만원</strong>이상</th>
+	                                <td><strong>2만원</strong>할인</td>
+	                              </tr>
+                              </tbody>
+                              <tfoot></tfoot>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- 레이어 인포 -->
+                    </li>
+                    <li><b>5만원이상 구매시 2,000원 추가적립 </b></li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">카드혜택</th>
+                <td>
+                  <ul class="benefit">
+                    <li>(3/1 ~ 3/31 무이자 할부) 비씨, NH, 씨티 = 5만원 이상 2~6개월 / 삼성, 현대, 국민, 신한 = 5만원 이상 2~5개월</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">배송비</th>
+                <td>
+
+
+
+                      2,000원
+
+                      (해외배송가능)
+                      <em>*2만원 이상 구매시 배송비 무료</em>
+
+
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">구매수량</th>
+                <td>
+                  <div class="qty_wrap fl">
+                  	<label for="BUY_QTY"></label>
+                    <input type="text" class="qty_txt fl input_form" id="BUY_QTY" value="1" />
+                    <ul class="qty fl">
+                      <li class="up"><a href="#" onClick="upBuyQty();return false;"><img alt="구매수량증가" src="/resources/images/btn/btn_up02.gif"></a></li>
+                      <li class="down"><a href="#" onClick="downBuyQty();return false;"><img alt="구매수량감소" src="/resources/images/btn/btn_down02.gif"></a></li>
+                    </ul>
+                    <script type="text/javascript">
+	            		$("#BUY_QTY").focusout(function(){
+	            			var vMaxQty = prodCountCheck("P000422727");
+	            			var qty = $("#BUY_QTY").val();
+	            			if(vMaxQty < qty){
+	            				alert("이 상품은 한번 구매시 (한 아이디당) "+vMaxQty+"개 이상 구매가 불가능한 상품입니다. ");
+	            				$("#BUY_QTY").val(1);
+	            				return;
+	            			}
+	            		});
+                    	function upBuyQty(){
+                    		//최대 구매수량 체크
+                    		var vMaxQty = prodCountCheck("P000422727");
+                    		var qty = getIntDataValue($("#BUY_QTY").val()) + 1;
+                    		if(vMaxQty < qty){
+                    			alert("이 상품은 한번 구매시 (한 주문건당) "+vMaxQty+"개 이상 구매가 불가능한 상품입니다. ");
+                    			return;
+                    		}
+                    		$("#BUY_QTY").val(qty);
+                    		$("#BUY_QTY").trigger("change");
+                    	}
+                    	function downBuyQty(){
+                    		var qty = getIntDataValue($("#BUY_QTY").val()) - 1;
+                    		if(qty == 0){
+                    			alert("최소 구매수량은 1 이상 입니다.");
+                    			return;
+                    		}else $("#BUY_QTY").val(qty);
+                    		$("#BUY_QTY").trigger("change");
+                    	}
+                    </script>
+                  </div> <span class="qty_unit">개</span>
+                </td>
+              </tr>
+              <tr id="selOptionArea"></tr>
+              <tr>
+                <th scope="row">출고예상일</th>
+
+
+<!-- 		                <td><b>발매일&nbsp;미정</b></td> -->
+
+
+
+
+			                <td>2019.04.12 출고예정</td>
+
+
+
+
+
+
+
+
+
+
+<!-- 			                <td>-</td> -->
+
+
+
+              </tr>
+              <tr class="benefit_dis">
+                <th scope="row">최대할인가</th>
+                <td class="al_l"><span id="MaxDisPrice" class="dis_price">0</span><span id="MaxDisRate" class="dis_price02">원 (총 0%↓)</span></td>
+              </tr>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+        <div class="clearfix mt15">
+
+
+
+
+
+
+
+		              <a href="#" onClick="immediateBuyProd3();return false;" class="fl mr5"><img src="/resources/images/btn/btn_buy001.gif" alt="예약구매" /></a>
+		              <a href="#" onClick="putProdCart2();return false;" class="fl mr5"><img src="/resources/images/btn/btn_addcart03.gif" alt="장바구니" /></a>
+
+
+
+
+
+
+
+
+          <a href="#" onClick="putMemberProd2('CART2');return false;" class="fl mr5"><img src="/resources/images/btn/btn_wishlist03.gif" alt="관심상품" /></a>
+          <a href="#" onClick="putMemberProd2('CART3');return false;" class="fl"><img src="/resources/images/btn/btn_director.gif" alt="소장하기" /></a>
+        </div>
+        <ul class="product_info mt30">
+          <li class="typ_txt02">* 본 상품에 대해 궁금한 사항이 있으신가요? <a href="https://www.synnara.co.kr/sh/sh330Main.do?productId=P000422727"><img src="/resources/images/btn/btn_contact02.gif" alt="1:1문의" /></a></li>
+          <li class="typ_txt03">* 신나라레코드의 판매량은 신나라차트, 한터차트, 가온차트, kbs 뮤직뱅크 등… 에 제공 / 반영됩니다.</li>
+          <li class="typ_txt03">* シンナラ・レコードの販売量は、シンナラ・チャート、ハント・チャート(HANTEO・チャート)、ガオン・チャート、KBSミュージック・バンクなどに提供、反映されます。</li>
+          <li class="typ_txt03">* SYNNRARA唱片行的销售量用于提供及反映在SYNNRARA CHART、HANTEO CHART、GAON CHART、KBS音乐银行等。</li>
+        </ul>
+      </div>
+      <!-- //info_area -->
+    </div>
+    <!-- //detail_view_top -->
+    <div id="_tab01">
+      <div class="adv_s_link_wrap mt30">
+        <ul class="adv_search_link clearfix typ_tab">
+          <li class="fir selected"><span><img src="/resources/images/country/tab_detail_v01_on.gif" alt="상품정보" /></span></li>
+          <li><a href="#_tab02"><img src="/resources/images/country/tab_detail_v02.gif" alt="상세정보" /></a></li>
+          <li><a href="#_tab03"><img src="/resources/images/country/tab_detail_v03.gif" alt="관련 이벤트" /></a></li>
+          <li><a href="#_tab04"><img src="/resources/images/country/tab_detail_v04.gif" alt="리뷰" /></a></li>
+        </ul>
+      </div>
+
+      <!-- 상품정보 -->
+      <div id="tab_detail1" class="detail_v_cont"></div>
+      <!-- //상품정보 -->
+    </div>
+
+    <div id="_tab02">
+      <div class="adv_s_link_wrap mt30">
+        <ul class="adv_search_link clearfix typ_tab">
+          <li class="fir"><a href="#_tab01"><img src="/resources/images/country/tab_detail_v01.gif" alt="상품정보" /></a></li>
+          <li class="selected"><span><img src="/resources/images/country/tab_detail_v02_on.gif" alt="상세정보" /></span></li>
+          <li><a href="#_tab03"><img src="/resources/images/country/tab_detail_v03.gif" alt="관련 이벤트" /></a></li>
+          <li><a href="#_tab04"><img src="/resources/images/country/tab_detail_v04.gif" alt="리뷰" /></a></li>
+        </ul>
+      </div>
+
+      <!-- 상세정보 -->
+      <div id="tab_detail2" class="detail_v_cont"></div>
+      <!-- //상세정보 -->
+    </div>
+
+    <div id="_tab03">
+      <div class="adv_s_link_wrap mt30">
+        <ul class="adv_search_link clearfix typ_tab">
+          <li class="fir"><a href="#_tab01"><img src="/resources/images/country/tab_detail_v01.gif" alt="상품정보" /></a></li>
+          <li><a href="#_tab02"><img src="/resources/images/country/tab_detail_v02.gif" alt="상세정보" /></a></li>
+          <li class="selected"><span><img src="/resources/images/country/tab_detail_v03_on.gif" alt="관련 이벤트" /></span></li>
+          <li><a href="#_tab04"><img src="/resources/images/country/tab_detail_v04.gif" alt="리뷰" /></a></li>
+        </ul>
+      </div>
+
+      <!-- 관련이벤트-->
+      <div id="tab_detail3" class="detail_v_cont"></div>
+      <!-- //관련이벤트 -->
+    </div>
+
+    <div id="_tab04">
+      <div class="adv_s_link_wrap mt30">
+        <ul class="adv_search_link clearfix typ_tab">
+          <li class="fir"><a href="#_tab01"><img src="/resources/images/country/tab_detail_v01.gif" alt="상품정보" /></a></li>
+          <li><a href="#_tab02"><img src="/resources/images/country/tab_detail_v02.gif" alt="상세정보" /></a></li>
+          <li><a href="#_tab03"><img src="/resources/images/country/tab_detail_v03.gif" alt="관련 이벤트" /></a></li>
+          <li class="selected"><span><img src="/resources/images/country/tab_detail_v04_on.gif" alt="리뷰" /></span></li>
+        </ul>
+      </div>
+
+      <!-- 리뷰 -->
+      <div id="tab_detail4" class="detail_v_cont"></div>
+      <!-- //리뷰 -->
+    </div>
+  </div>
+  <!-- //detail_view_wrap -->
+</div>
+<!-- //contents -->
+<script type="text/javascript" src="/resources/js/commonProd.js"></script>
+<script type="text/javascript">
+
+// $(document).ready(function(){
+// 	 //포스트아이콘 위치
+// 	 var vBestYn = "N";
+// 	 var vEventYn = "Y";
+// 	 var vDomsticYn = "Y";
+// 	 var vDiscountYn = "N";
+// 	 var vSteadyYn = "N";
+// 	 var html = "";
+
+// 	 if(vBestYn == "Y" || vEventYn == "Y" || vDomsticYn == "N" || vDiscountYn == "Y" || vSteadyYn == "Y"){
+// 	  html = "<p style=\"position:absolute; top:148px; left:-16px; width:80px; height:70px; padding:6px 6px 0 0; background:url('/resources/images/main/poster_01.png') no-repeat left top;\"></p>"
+// 	  $("#PostIcon").html(html);
+// 	 }else{
+// 	  html = "<p style=\"position:absolute; top:130px; left:-16px; width:80px; height:70px; padding:6px 6px 0 0; background:url('/resources/images/main/poster_01.png') no-repeat left top;\"></p>"
+// 	  $("#PostIcon").html(html);
+// 	 }
+// });
+
+/**
+ * 글 작성
+ */
+ function moveInsert(){
+
+	var vLogYn = "N";
+	if(vLogYn == "N"){
+		if(confirm("로그인이 필요합니다. 로그인 하시겠습니까?")){
+			location.href = "https://www.synnara.co.kr/sl/sl110Main/login.do";
+		}
+	}else{
+		var params = getParams("moveDetail");
+		location.href = "/sb/communityInsert.do" + "?" + params;
+	}
+
+}
+	$(function(){
+		$("#BUY_QTY").change(function(){
+			var qty = getIntDataValue($(this).val());
+			if(qty == 0){
+    			alert("최소 구매수량은 1 이상 입니다.");
+    			$("#BUY_QTY").val("1");
+    		}
+			return;
+		});
+
+		// 고액구매 특별할인
+		$("#specialDisPop").hover(
+			function(){
+				var position = $(this).position();
+				var divTop = position.top;
+				var divLeft = position.left + 40;
+				$(".lay_up").css({
+					"top":divTop,
+					"left":divLeft,
+					"position":"absolute"
+				}).show();
+			},
+			function(){
+				$(".lay_up").hide();
+			}
+		);
+
+
+		$("#custGradePop").click(function(){
+			window.open('/sh/sh141Main.do',"등급안내","width=600 height=500");
+		});
+
+		//상품선택부분
+		viewSelOption();
+
+		//최대할인가
+		calMaxDiscountPrice();
+
+		//상품정보탭
+		getDetailTab1();
+		getDetailTab2();
+		getDetailTab3();
+		getDetailTab4();
+	});
+
+	function viewSelOption(){
+		$.ajax({
+ 			type: "post",
+ 			async: true,
+ 			url: "/sp/sp120MainOption/selOption.do",
+ 			data: $.param({
+ 					"PROD_ID": $("#PROD_ID").val()
+ 			}),
+ 			dataType: "html",
+ 			success: function(data){
+ 				$("#selOptionArea").html(data);
+ 			}
+ 		});
+	}
+
+	function getDetailTab1(){
+		$.ajax({
+ 			type: "post",
+ 			async: true,
+ 			url: "/sp/sp120MainDetail/detailTab1.do",
+ 			data: $.param({
+ 				"PROD_ID" : $("#PROD_ID").val()
+ 			}),
+ 			dataType: "html",
+ 			success: function(data){
+ 				$("#tab_detail1").html(data);
+ 			}
+		});
+	}
+
+	function getDetailTab2(){
+		$.ajax({
+ 			type: "post",
+ 			async: true,
+ 			url: "/sp/sp120MainDetail/detailTab2.do",
+ 			data: $.param({
+ 				"PROD_ID" : $("#PROD_ID").val()
+ 			}),
+ 			dataType: "html",
+ 			success: function(data){
+ 				$("#tab_detail2").html(data);
+ 			}
+		});
+	}
+
+	function getDetailTab3(){
+		$.ajax({
+ 			type: "post",
+ 			async: true,
+ 			url: "/sp/sp120MainDetail/detailTab3.do",
+ 			data: $.param({
+ 				"PROD_ID" : $("#PROD_ID").val()
+ 			}),
+ 			dataType: "html",
+ 			success: function(data){
+ 				$("#tab_detail3").html(data);
+ 			}
+		});
+	}
+
+	function getDetailTab4(){
+		$.ajax({
+ 			type: "post",
+ 			async: true,
+ 			url: "/sp/sp120MainDetail/detailTab4.do",
+ 			data: $.param({
+ 				"PROD_ID" : $("#PROD_ID").val()
+ 			}),
+ 			dataType: "html",
+ 			success: function(data){
+ 				$("#tab_detail4").html(data);
+ 			}
+		});
+	}
+
+
+	function immediateBuyProd3(){
+		var prod_id = "";
+		var option_prod_id = "";
+		var gift_id = "";
+		var add_prod_id = "";
+		var add_prod_qty = "";
+		var isBuy = loginCheck() ;
+
+		prod_id = $("#PROD_ID").val();
+
+		if($("#SEL_OPTIONS").length > 0){
+			option_prod_id = $("#SEL_OPTIONS").val();
+			if(option_prod_id == "") return;
+		}
+
+		if($("#SEL_GIFTS").length > 0){
+			gift_id = $("#SEL_GIFTS").val();
+			if(gift_id == "") return;
+		}
+
+		if($("#SEL_ADD_PRODS").length > 0){
+			$("input[name='ADD_PROD_ID']").each(function(){
+				add_prod_id += "&" + $.param({"ADD_PROD_ID" : $(this).val()});
+			});
+
+			$("input[name='ADD_PROD_QTY']").each(function(){
+				add_prod_qty += "&" + $.param({"ADD_PROD_QTY" : $(this).val()});
+			});
+		}
+
+		param = $.param({
+			"PROD_ID" : prod_id,
+			"QTY" : $("#BUY_QTY").val(),
+			"OPTION_PROD_ID" : option_prod_id,
+			"GIFT_ID" : gift_id
+		});
+
+		if(!isBuy){
+			// 로그인 창
+//			var pUrl = "/sl/sl110Main/popupLogin.do?type=1";
+			var pUrl =  'https://www.synnara.co.kr/sl/sl110Main/popupLogin.do?type=1';
+			window.open(pUrl,"","width=510 height=380 menubar=no status=no");
+		}else{
+			$.ajax({
+				type: "post",
+				async: true,
+				url: "/sp/sp120MainBuy/immediateBuyProd.do",
+				data: param + add_prod_id + add_prod_qty,
+				dataType: "text",
+				success: function(data){
+					var jsonData = eval('('+data+')');
+					location.href = jsonData.URL;
+				}
+			});
+		}
+	}
+
+	function coupondownload(){
+
+// 			if (!loginCheck()) {
+// 				alert("로그인 후 다운로드 하세요.");
+// 				return;
+// 			}
+
+	        var pop_height = 270 + ("4" - 1) * 50;
+            var prod_id = $("#PROD_ID").val();
+			var pUrl ='/sp/sp120Main_ProdCouponPop.do'+ "?" + $.param({productId : prod_id});
+			var winOpt = "width=550, height=" + pop_height + ", resizable=0, scrollbars=yes, status=0, titlebar=0, toolbar=0, left=100, top=0";
+			window.open(pUrl ,"popup", winOpt  );
+
+
+// 	        var url = "/sp/sp120Main_ProdCouponPop.do" ;
+// 	        var str = "";
+// 	        var param = "";
+//             param = setParam(param, "productId", $("#PROD_ID").val());
+//             url = url + param;
+
+//             str = '<iframe id="ifm_coupondownload" name="ifm_coupondownload" style="padding:2px; width:550px;height: ' + pop_height + 'px" src=" '+url+' " />';
+
+//             $("#prod_coupon_pop")
+//                .html(str).dialog({
+//                 title : "쿠폰다운로드",
+//                 autoOpen : true,
+//                 width : 590,
+//                 height : pop_height,
+//                 modal : true,
+//                 resizable : true,
+//                 autoResize : true,
+//                 position : {
+//                     my : "center"
+//                 },
+//                 overlay : {
+//                     opacity : 0.5,
+//                     background : "black"
+//                 }
+//             });
+	}
+
+	function gotosm270Main(){
+		location.href="/sm/sm270Main.do";
+	}
+
+	function loginCheck(){
+		var result = false;
+
+		$.ajax({
+			type:'post',
+			async:false,
+			url:'/isLogin.do',
+			dataType:'html',
+			timeout:30000,
+			cache:false,
+			error:function(request, status, error){
+				alert("code : " + request.status + " \r\n" + "message : " + request.statusText);
+			},
+			success:function(data){
+				if($.trim(data) == 'Y') result = true;
+				else result = false;
+			}
+		});
+		return result;
+	}
+</script>
+<!--         <div class="ban_footer"> -->
+<!--           <a href="#"><img src="../resources/images/common/ban_footer.gif" alt="" /></a> -->
+<!--         </div> -->
+      </div>
+      <!-- //container -->
+
+      <!-- footer -->
+
+
+
+
+
+<!-- footer banner-->
+<!-- <div class="footerBanner" > -->
+<!--   <div id="bannerImgUrl" class="footerBannerImg" style="width: 990px; padding: 10px 0 30px 0; margin: 0 auto;"> -->
+<!--        <a href='http://www.synnara.co.kr/se/se100Detail.do?PLANSALE_ID=PSTE000717'> -->
+<!--        <img src='https://sfs.synnara.co.kr/App/ImageViewerEShop?IID=BN00002202&FMT=2&ATTACH=B&TYPE=1' width='990' height='60'/></a>   -->
+<!--   </div> -->
+<!-- </div> -->
+
+<div id="footer"  >
+  <div class="footer_link01">
+    <dl class="customer clearfix">
+      <dt>
+        <img src="/resources/images/layout/customer.gif" title="고객문의" alt="고객문의" />
+      </dt>
+      <dd>
+        <ul class="clearfix">
+          <li><a href="/sh/sh160Detail.do"><img src="/resources/images/layout/customer01.gif" title="공동구매 안내" alt="공동구매 안내" /></a></li>
+          <li><a href="/sh/sh170Detail.do"><img src="/resources/images/layout/customer02.gif" title="대량구매 안내" alt="대량구매 안내" /></a></li>
+          <li><a href="/sh/sh180Detail.do"><img src="/resources/images/layout/customer03.gif" title="해외배송 안내" alt="해외배송 안내" /></a></li>
+          <li><a href="/sh/sh310Detail.do?BBS_SUB_TYPE=F005&SUBJECT="><img src="/resources/images/layout/customer04.gif" title="교환/반품/환불 안내" alt="교환/반품/환불 안내" /></a></li>
+          <li><a href="https://www.synnara.co.kr/sh/sh330Main.do"><img src="/resources/images/layout/customer05.gif" title="1:1문의하기" alt="1:1문의하기" /></a></li>
+          <li><a href="/sh/sh210Main1.do"><img src="/resources/images/layout/customer06.gif" title="매장안내" alt="매장안내"  /></a></li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+  <div class="footer_link02">
+    <ul class="terms clearfix">
+      <li><a href="/sh/sh110Main.do"><img src="/resources/images/layout/footer01.gif" title="이용약관" alt="이용약관"  /></a></li>
+      <li><a href="/sh/sh120Main.do"><img src="/resources/images/layout/footer02.gif" title="개인정보처리방침" alt="개인정보처리방침" /></a></li>
+      <li><a href="/sh/sh130Main.do"><img src="/resources/images/layout/footer03.gif" title="이메일무단수집거부" alt="이메일무단수집거부"  /></a></li>
+
+      <li><a href="http://b2b.synnara.com/index.jsp"><img src="/resources/images/layout/footer05.gif" title="신니라B2B" alt="신니라B2B" /></a></li>
+      <li><a href="/sh/sh220Main.do"><img src="/resources/images/layout/footer06.gif" title="오시는 길" alt="오시는 길"/></a></li>
+      <li><a href="/sh/sh410Main.do"><img src="/resources/images/layout/footer07.gif" title="사이트맵" alt="사이트맵" /></a></li>
+
+    </ul>
+  </div>
+  <div class="company clearfix">
+    <p class="f_logo">
+      <a href="#"><img src="/resources/images/layout/footer_logo.gif" title="신나라레코드" alt="신나라레코드"  /></a>
+    </p>
+    <ul class="add">
+      <li><img src="/resources/images/layout/footer_address.gif" title="주소" alt="주소 경기도 용인시 수지구 문인로 16 (동천동)" /></li>
+
+
+
+
+
+
+      <li class="cb"><a href="mailto:shopmaster@synnara.com"><img src="/resources/images/layout/footerEmail.gif" title="shopmaster@synnara.com" alt="shopmaster@synnara.com" /></a></li>
+      <li class="cb"><img src="/resources/images/layout/copyright.gif" title="Copyrightⓒ2012 Media SYNNARA Co.,Ltd. All Right Reserved." alt="opyrightⓒ2012 Media SYNNARA Co.,Ltd. All Right Reserved." /></li>
+
+    </ul>
+    <ul class="info">
+
+      <li> <img src="/resources/images/layout/inipay_43.png" border="0" title="클릭하시면 이니시스 결제시스템의 유효성을 확인하실 수 있습니다." alt="이니페이로고" style="cursor:pointer" Onclick=javascript:window.open("https://mark.inicis.com/mark/popup_v1.php?no=48375&st=1390897570","mark","scrollbars=no,resizable=yes,width=565,height=683");></li>
+	  <li> <img src="/resources/images/blank.gif" width="10" alt="이니페이로고"/> </li>
+      <li> <img src="/resources/images/layout/inipayescrow_43.png" border="0" title="클릭하시면 이니시스 결제시스템의 유효성을 확인하실 수 있습니다."  alt="에스크로이니페이로고" style="cursor:pointer" Onclick=javascript:window.open("https://mark.inicis.com/mark/escrow_popup.php?no=48380&st=1390898453","mark","scrollbars=no,resizable=yes,width=565,height=683");> </li>
+	  <li> <img src="/resources/images/blank.gif" width="10" alt="에스크로이니페이로고"/> </li>
+      <li class="norton"><img src="https://www.ucert.co.kr/images/maincenterContent/trustlogo/ucert_black.gif" alt="SSL인증로고" width="60" height="65" align="absmiddle" border="0" style="cursor:hand" Onclick=javascript:window.open("https://www.ucert.co.kr/trustlogo/UCERT_TRUSTLOGO.html?sealnum=ceed8a7d649d8c16","mark","scrollbars=no,resizable=no,width=530,height=468");></li>
+    </ul>
+    <div>
+      <ul class="add">
+        <li><a href="#"><img src="/resources/images/layout/footer_img01.gif" title="" alt="+SHOP에 등록된 상품 중 입점몰의 상품은 그 내용과 판매의 책임이 모두 판매자에게 있으며 신나라레코드는 해당상품의 내용 및 거래에 대해 책임지지 않습니다" /></a></li>
+      </ul>
+    </div>
+
+<!--     <div> -->
+<!-- 	    <ul class="info" > -->
+
+
+
+
+
+<!-- 	      <li><img src="https://www.ucert.co.kr/images/maincenterContent/trustlogo/ucert_black.gif" width="55" height="55" align="absmiddle" border="0" style="cursor:hand" Onclick=javascript:window.open("https://www.ucert.co.kr/trustlogo/UCERT_TRUSTLOGO.html?sealnum=ceed8a7d649d8c16","mark","scrollbars=no,resizable=no,width=530,height=468");></li> -->
+<!-- 	    </ul> -->
+
+<!--     </div> -->
+
+
+  </div>
+
+
+</div>
+
+<!-- //footer -->
+<hr />
+
+<!-- footer 공동배너
+<script type="text/javascript">
+       $(document).ready(function() {
+         $.ajax({
+             type : "post",
+             async : false,
+         url : '/common/footerBanner.do',
+             dataType : "json",
+             timeout : 3000,
+             cache : false,
+             data : ({
+                 "DISPLAY_ID" : "SS110B119"
+             }),
+             error : function(request, status, error) {
+                 alert("code : " + request.status + " \r\n" + "message : " + request.statusText);
+             },
+             success : function(data) {
+                 var jsonData = eval('(' + data + ')');
+                 var html = "";
+                 if (jsonData.list != null) {
+                     html += "<a href='"+jsonData.list[0].LINK_URL+"'>";
+                     html += "<img src='"+jsonData.list[0].IMG_URL+"' width='990' height='60'/></a>";
+                     $("#bannerImgUrl").html(html);
+                 }
+             }
+         });
+     });
+</script>
+-->
+
+
+<!-- 공통 적용 스크립트 , 모든 페이지에 노출되도록 설치. 단 전환페이지 설정값보다 항상 하단에 위치해야함 -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"> </script>
+<script type="text/javascript">
+if (!wcs_add) var wcs_add={};
+wcs_add["wa"] = "s_765d50fa78b";
+if (!_nasa) var _nasa={};
+wcs.inflow();
+wcs_do(_nasa);
+</script>
+ <!-- NAVER 공통 적용 스크립트 END -->
+
+
+
+      <!-- //footer -->
+
+      <!-- skipnavigation -->
+      <p class="skipnavigation"><a href="#top">페이지 맨 위로 이동</a></p>
+      <!-- //skipnavigation -->
+    </div>
+  </body>
+</html>
+
